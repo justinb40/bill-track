@@ -20,28 +20,33 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-3">
 				<h5>Pay Period (1)</h5>
 				
 				<div class="period-1-form">
 					<input type="text" class="form-control period-1-amount" placeholder="Enter Amount">
-					<button type="submit" class="btn btn-default period-1-submit">Submit</button>										
+					<!--<button type="submit" class="btn btn-default period-1-submit">Submit</button>-->										
 				</div>
 				
 				<div class="pay-period-total period-1-total"></div>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-3">
 				<h5>Pay Period (2)</h5>
 				
 				<div class="period-2-form">
 					<input type="text" class="form-control period-2-amount" placeholder="Enter Amount">
-					<button type="submit" class="btn btn-default period-2-submit">Submit</button>
+					<!--<button type="submit" class="btn btn-default period-2-submit">Submit</button>-->
 				</div>
 				
 				<div class="pay-period-total period-2-total">
 					
 				</div>
+			</div>
+			
+			<div class="col-md-2">
+				<h5>Total Pay Periods</h5>
+				<button type="submit" class="btn btn-default pay-period-submit">Submit</button>
 			</div>
 		</div>	
 	</div>
@@ -51,6 +56,34 @@
 (function() {
 	'use strict';
 	
+	// Redux
+	var payPerSubmit = $('.pay-period-submit');
+		
+	
+	payPerSubmit.click(function(e){
+		e.preventDefault();
+		
+		var per1Amount = parseInt($('.period-1-amount').val()),
+			per1Total = $('.period-1-total'),
+			per1Form = $('.period-1-form'),
+			per2Amount = parseInt($('.period-2-amount').val()),
+			per2Total = $('.period-2-total'),
+			per2Form = $('.period-2-form');
+		
+		// Output period 1 & 2 Amount
+		per1Form.fadeOut('fast');
+		per1Total.html('$' + per1Amount);
+		per2Form.fadeOut('fast');
+		per2Total.html('$' + per2Amount);
+		
+		// Show combined total
+		$('.period-combined-total').fadeIn();
+		$('.combined-total').html(per1Amount + per2Amount).prepend('$');
+	});
+	
+	
+	
+	// Code Below is old - delete when ready
 	// Pay Period 1 Amount
 	$('.period-1-submit').click(function(e){
 		e.preventDefault();
