@@ -1,0 +1,9 @@
+.pay-period-total,
+.combined-total {
+	color: green;
+	font-weight: bold;
+}
+
+.period-combined-total {
+	display: none;
+}

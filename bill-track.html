@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bill Track</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h2>Bill Track</h2>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="period-combined-total">
+					<h5>Combined Total</h5>
+					<div class="combined-total"></div>
+				</div>
+			</div>						
+		</div>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<h5>Pay Period (1)</h5>
+				
+				<div class="period-1-form">
+					<input type="text" class="form-control period-1-amount" placeholder="Enter Amount">
+					<button type="submit" class="btn btn-default period-1-submit">Submit</button>										
+				</div>
+				
+				<div class="pay-period-total period-1-total"></div>
+			</div>
+			
+			<div class="col-md-6">
+				<h5>Pay Period (2)</h5>
+				
+				<div class="period-2-form">
+					<input type="text" class="form-control period-2-amount" placeholder="Enter Amount">
+					<button type="submit" class="btn btn-default period-2-submit">Submit</button>
+				</div>
+				
+				<div class="pay-period-total period-2-total">
+					
+				</div>
+			</div>
+		</div>	
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+(function() {
+	'use strict';
+	
+	// Pay Period 1 Amount
+	$('.period-1-submit').click(function(e){
+		e.preventDefault();
+		var per1Amount = parseInt($('.period-1-amount').val()),
+			per1Total = $('.period-1-total'),
+			per1Form = $('.period-1-form');
+		
+		per1Form.fadeOut('fast');
+		per1Total.html('$' + per1Amount);
+	});
+	
+	// Pay Period 2 Amount
+	$('.period-2-submit').click(function(e){
+		e.preventDefault();
+		var per2Amount = parseInt($('.period-2-amount').val()),
+			per2Total = $('.period-2-total'),
+			per2Form = $('.period-2-form');
+		
+		per2Form.fadeOut('fast');
+		per2Total.html('$' + per2Amount);
+		
+		// Display combined pay period totals after 2nd period is added
+		var period1Total = parseInt($('.period-1-total').html().replace(/\D/g,'')),
+			period2Total = parseInt($('.period-2-total').html().replace(/\D/g,''));
+		
+		// Both periods combined total
+		$('.period-combined-total').fadeIn();
+		$('.combined-total').html(period1Total + period2Total).prepend('$');		
+	});	
+	
+	
+	
+})();
+</script>
+</body>
+</html>
