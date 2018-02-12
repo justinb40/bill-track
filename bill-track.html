@@ -14,7 +14,7 @@
 			<div class="col-md-6">
 				<div class="period-combined-total">
 					<h5>Combined Total</h5>
-					<div class="combined-total"></div>
+					<div class="combined-total total-output"></div>
 				</div>
 			</div>						
 		</div>
@@ -28,7 +28,7 @@
 					<!--<button type="submit" class="btn btn-default period-1-submit">Submit</button>-->										
 				</div>
 				
-				<div class="pay-period-total period-1-total"></div>
+				<div class="pay-period-total period-1-total total-output"></div>
 			</div>
 			
 			<div class="col-md-3">
@@ -39,14 +39,13 @@
 					<!--<button type="submit" class="btn btn-default period-2-submit">Submit</button>-->
 				</div>
 				
-				<div class="pay-period-total period-2-total">
-					
-				</div>
+				<div class="pay-period-total period-2-total total-output"></div>
 			</div>
 			
 			<div class="col-md-2">
 				<h5>Total Pay Periods</h5>
-				<button type="submit" class="btn btn-default pay-period-submit">Submit</button>
+				<button type="submit" class="btn btn-success pay-period-submit">Submit</button>
+				<button type="reset" class="btn btn-danger pay-period-reset">Reset</button>
 			</div>
 		</div>	
 	</div>
@@ -57,18 +56,19 @@
 	'use strict';
 	
 	// Redux
-	var payPerSubmit = $('.pay-period-submit');
+	var payPerSubmit = $('.pay-period-submit'),
+		resetBtn = $('.pay-period-reset'),
+		per1Form = $('.period-1-form'),
+		per2Form = $('.period-2-form');
 		
 	
 	payPerSubmit.click(function(e){
 		e.preventDefault();
 		
 		var per1Amount = parseInt($('.period-1-amount').val()),
-			per1Total = $('.period-1-total'),
-			per1Form = $('.period-1-form'),
+			per1Total = $('.period-1-total'),			
 			per2Amount = parseInt($('.period-2-amount').val()),
-			per2Total = $('.period-2-total'),
-			per2Form = $('.period-2-form');
+			per2Total = $('.period-2-total');			
 		
 		// Output period 1 & 2 Amount
 		per1Form.fadeOut('fast');
@@ -80,6 +80,19 @@
 		$('.period-combined-total').fadeIn();
 		$('.combined-total').html(per1Amount + per2Amount).prepend('$');
 	});
+	
+	// Reset all values
+	resetBtn.click(function(){
+		$(':input').val('');
+         
+        $('.total-output').empty();
+        
+        per1Form.fadeIn('fast');
+        per2Form.fadeIn('fast');
+        $('.period-combined-total').fadeOut();
+	});
+	
+	
 	
 	
 	
