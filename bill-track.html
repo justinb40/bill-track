@@ -29,6 +29,16 @@
 				</div>
 				
 				<div class="pay-period-total period-1-total total-output"></div>
+				
+				<div class="bill-items">
+					<h5>Bill deduction</h5>
+<!--
+					<input type="text" class="form-control bill-item-name" placeholder="Enter Bill Name">
+					<input type="text" class="form-control bill-item-amount" placeholder="Enter Bill Amount">
+					<button type="submit" class="btn btn-default btn-success">Enter Bill</button>
+-->
+					<button class="btn btn-success add-bill-item">Add Bill</button>
+				</div>
 			</div>
 			
 			<div class="col-md-3">
@@ -91,44 +101,53 @@
         per2Form.fadeIn('fast');
         $('.period-combined-total').fadeOut();
 	});
+			
 	
-	
-	
-	
-	
-	// Code Below is old - delete when ready
-	// Pay Period 1 Amount
-	$('.period-1-submit').click(function(e){
-		e.preventDefault();
-		var per1Amount = parseInt($('.period-1-amount').val()),
-			per1Total = $('.period-1-total'),
-			per1Form = $('.period-1-form');
+	// Add Bill item
+	function billItem() {
+		var $billItems = $('.bill-items');		
 		
-		per1Form.fadeOut('fast');
-		per1Total.html('$' + per1Amount);
+		// Object literal, defining properties
+		var billItem = $('<div>', {"class" : "bill-item"}),
+			itemInput1 = $('<input>', {
+				"class" : "form-control bill-item-name",
+				"placeholder" : "Enter Bill Name"
+			}),
+			itemInput2 = $('<input>', {
+				"class" : "form-control bill-item-amount",
+				"placeholder" : "Enter Bill Amount"
+			}),
+			submitBtn = $('<button>', {
+				"type" : "submit",
+				"class" : "btn btn-default btn-success btn-bill-submit",
+				"text" : "Enter Bill"
+			}),
+			bundled = billItem.append(itemInput1, itemInput2, submitBtn);
+		
+		$billItems.append(bundled);
+	}
+	
+	$('.add-bill-item').click(function() {
+		billItem();
+	});		
+	
+	// Capture Bill Item Information
+	// Loop through each bill item	
+	function billItemEnter() {
+		var billName = $('.bill-item-name').val(),
+			billAmount = $('.bill-item-amount').val();	
+				
+		$('.bill-item').each(function(){
+														
+		});
+		
+		console.log(billName, billAmount);
+	}
+	
+	// Attach to dom since element is generated dynamically
+	$(document).on('click','.btn-bill-submit',function() {
+		billItemEnter();
 	});
-	
-	// Pay Period 2 Amount
-	$('.period-2-submit').click(function(e){
-		e.preventDefault();
-		var per2Amount = parseInt($('.period-2-amount').val()),
-			per2Total = $('.period-2-total'),
-			per2Form = $('.period-2-form');
-		
-		per2Form.fadeOut('fast');
-		per2Total.html('$' + per2Amount);
-		
-		// Display combined pay period totals after 2nd period is added
-		var period1Total = parseInt($('.period-1-total').html().replace(/\D/g,'')),
-			period2Total = parseInt($('.period-2-total').html().replace(/\D/g,''));
-		
-		// Both periods combined total
-		$('.period-combined-total').fadeIn();
-		$('.combined-total').html(period1Total + period2Total).prepend('$');		
-	});	
-	
-	
-	
 })();
 </script>
 </body>

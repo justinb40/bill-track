@@ -7,3 +7,19 @@
 .period-combined-total {
 	display: none;
 }
+
+
+
+/* Bill item  */
+.bill-items {
+	margin-top: 30px;	
+}
+
+.bill-item,
+.bill-item .form-control {
+	margin-bottom: 10px;
+}
+
+.add-bill-item {
+	margin-bottom: 10px;
+}
